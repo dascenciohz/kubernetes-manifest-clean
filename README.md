@@ -3,9 +3,9 @@ Python script that removes all keys:values ​​from a kubernetes manifest so i
 
 # Requirements
 * Python3
-* Library Python3 YAML
-* Library Python3 OS
-* Library Python3 SYS
+* Library python3 yaml
+* Library python3 os
+* Library python3 sys
 
 # Arguments
 ```
@@ -13,7 +13,7 @@ arg1: Name of the directory where all the subfolders with the kubernetes manifes
 arg2: Name of the new folder where the clean kubernetes manifests will be stored. 
 ```
 
-# script execution
-```
+# Script execution
+```python
 python3 kubernetes-manifests-clean.py arg1 arg2
 ```
