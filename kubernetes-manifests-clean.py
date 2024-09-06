@@ -9,8 +9,8 @@ filtered_resources = []
 FIELDS_TO_RM = {
     "metadata": {
         "annotations": {
-            "kubectl.kubernetes.io/last-applied-configuration": " ",
-            "autoscaling.alpha.kubernetes.io/conditions": " ",
+            "kubectl.kubernetes.io/last-applied-configuration": " ", 
+            "autoscaling.alpha.kubernetes.io/conditions": " ", 
             "control-plane.alpha.kubernetes.io/leader": " "
         },
         "generation": " ",
@@ -20,14 +20,12 @@ FIELDS_TO_RM = {
         "uid": " ",
         "managedFields": " "
     },
-    "spec": {
-        "clusterIP": " ",
-        "clusterIPs": " ",
-        "finalizers": " "
+    "spec": {"clusterIP": " ", 
+             "clusterIPs": " ", 
+             "finalizers": " "
     },
     "status": " "
 }
-
 def remove_fields(rm, d):
     for k in rm.keys():
         if k in d.keys():
@@ -41,13 +39,11 @@ def write_manifest_clear(path, namespace, filename, data):
     manifest_path = os.path.join(path, namespace)
     if not os.path.exists(manifest_path):
         os.makedirs(manifest_path)
-        print(f"Directorio '{manifest_path}' creado.")
-    else:
-        print(f"Directorio '{manifest_path}' ya existe.")
+        print(f"\n[+] Directorio '{manifest_path}' creado.")
     ruta_archivo = os.path.join(manifest_path, filename)
     with open(ruta_archivo, 'w') as archivo:
         archivo.write(data)
-    print(f"Manifiesto YAML '{ruta_archivo}' creado y guardado.")
+    print(f"\t[+] Limpiando YAML '{ruta_archivo}'.")
 
 def manifests_clear(path, new_path):
     try:
@@ -71,11 +67,11 @@ def manifests_clear(path, new_path):
                     manifest_data = yaml.dump(manifest_yaml, default_flow_style=False)
                     write_manifest_clear(new_path, directory, manifest_name, manifest_data)
             except PermissionError:
-                print(f"(2) No tienes permiso para acceder a la ruta {f"{path}/{directory}"}.")
+                print(f"[!] No tienes permiso para acceder a {f"{path}/{directory}"}.")
     except FileNotFoundError:
-        print(f"(1) La ruta {path} no existe.")
+        print(f"[!] La ruta {path} no existe.")
     except PermissionError:
-        print(f"(1) No tienes permiso para acceder a la ruta {path}.")
+        print(f"[!] No tienes permiso para acceder a {path}.")
 
 if __name__ == "__main__":
     if not sys.stdin.isatty():
